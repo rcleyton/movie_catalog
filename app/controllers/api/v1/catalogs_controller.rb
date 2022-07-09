@@ -11,6 +11,12 @@ module Api
       def upload
         Catalog.upload(params[:file])
       end
+
+      def search
+        @catalogs = Catalog.where('release_year like ? OR category like ?',
+                                  "%#{params[:q]}%", "%#{params[:q]}%")
+        render json: @catalogs.order(:release_year), status: :ok
+      end
     end
   end
 end
