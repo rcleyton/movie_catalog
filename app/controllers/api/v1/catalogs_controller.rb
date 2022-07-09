@@ -4,7 +4,7 @@ module Api
   module V1
     class CatalogsController < ApplicationController
       def index
-        @catalogs = Catalog.all
+        @catalogs = Catalog.all.order(:release_year)
         render json: @catalogs, status: :ok
       end
 
