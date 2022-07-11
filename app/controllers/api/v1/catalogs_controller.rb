@@ -10,10 +10,11 @@ module Api
 
       def upload
         Catalog.upload(params[:file])
+        render json: { status: "Success" }
       end
 
       def search
-        @catalogs = Catalog.where('release_year like ? OR category like ?',
+        @catalogs = Catalog.where('release_year like ? OR title like ?',
                                   "%#{params[:q]}%", "%#{params[:q]}%")
         render json: @catalogs.order(:release_year), status: :ok
       end
